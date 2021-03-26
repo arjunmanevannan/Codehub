@@ -71,9 +71,9 @@ const repositorySchema = new mongoose.Schema({
   versionKey: true
 });
 
-let user = mongoose.model('user', userSchema);
-let file = mongoose.model('file', fileSchema);
-let repository = mongoose.model('repository', repositorySchema);
+const user = mongoose.model('user', userSchema);
+const file = mongoose.model('file', fileSchema);
+const repository = mongoose.model('repository', repositorySchema);
 
 module.exports.userModel = user;
 module.exports.fileModel = file;
