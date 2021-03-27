@@ -7,8 +7,6 @@ class File {
         this.name = name;
       }
 
-      this.value = value;
-
       if(typeof type === 'undefined'){
         this.type = "";
       }
@@ -22,6 +20,8 @@ class File {
       else{
         this.owner = owner;
       }
+
+      this.value = value;
 
       if(typeof last_edit_by === 'undefined'){
         this.last_edit_by = "";

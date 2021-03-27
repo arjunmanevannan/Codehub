@@ -49,7 +49,6 @@ const fileSchema = new mongoose.Schema({
   },
   last_edit_by:userSchema
 },
-{versionKey: true},
 {timestamps: true}
 );
 
@@ -66,7 +65,7 @@ const repositorySchema = new mongoose.Schema({
     default: false
   },
   members: [userSchema],
-  files: [fileSchema] 
+  files: [fileSchema]   
 },{
   versionKey: true
 });
