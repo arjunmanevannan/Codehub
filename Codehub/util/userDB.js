@@ -17,4 +17,17 @@ const addUser = (userObj, callback) => {
 }
 
 
+const editUser = async (userObj, id, callback) => {
+  const options = {new : true}  
+  const user = await userModel.findByIdAndUpdate(id, userObj, options)
+
+  if(!user){
+    console.log("Error while creating new user: "+err);
+    return;
+  }
+  callback(user);
+  
+}
+
+module.exports.editUser = editUser;
 module.exports.addUser = addUser;

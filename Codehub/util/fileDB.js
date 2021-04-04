@@ -17,4 +17,15 @@ const addFile = (fileObj, callback) => {
 }
 
 
+const editFile = async (fileObj, id, callback) => {
+  const options = {new : true}
+  const file = await fileModel.findByIdAndUpdate(id, fileObj, options)
+  if(!file){
+    console.log("Error while updating the file: "+err);
+    return;
+  }
+  callback(file);
+}
+
 module.exports.addFile = addFile;
+module.exports.editFile = editFile;

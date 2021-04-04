@@ -14,4 +14,16 @@ const getPublicRepositories = (callback) => {
     })
 }
 
+const addRepository = (repositoryObj, callback) => {
+    const Repository = new repositoryModel(repositoryObj);
+    Repository.save(function(err){
+        if(err){
+            console.log("Error while creating new repository: "+err);
+            return;
+        }
+        callback(Repository);
+    })
+}
+
 module.exports.getPublicRepositories = getPublicRepositories;
+module.exports.addRepository = addRepository;

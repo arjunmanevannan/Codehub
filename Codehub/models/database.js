@@ -1,5 +1,22 @@
 const mongoose = require('mongoose');
 
+const commitSchema = new mongoose.Schema({
+  content:{
+    type: String, 
+    required: true
+  },
+  message:{
+    type: String, 
+    required: true
+  },
+  isApproved:{
+    type: Boolean, 
+    default: false
+  }
+},
+{timestamps: true});
+
+
 const userSchema = new mongoose.Schema({
   firstName:{
     type: String,
@@ -29,7 +46,8 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true
-  }
+  },
+  approvals: [commitSchema]
 },{
   versionKey: false
 });
@@ -43,14 +61,14 @@ const fileSchema = new mongoose.Schema({
   type:{
       type: String
   },
-  owner:userSchema,
-  value:{
-    type: String
-  },
-  last_edit_by:userSchema
+  owner: userSchema,
+  value: commitSchema,
+  last_edit_by:userSchema,
+  comments:[String]
 },
 {timestamps: true}
 );
+
 
 const repositorySchema = new mongoose.Schema({
   name: {
@@ -64,16 +82,22 @@ const repositorySchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  owner: userSchema,
   members: [userSchema],
   files: [fileSchema]   
-},{
-  versionKey: true
-});
+},
+{timestamps: true});
+
+
+
+
 
 const user = mongoose.model('user', userSchema);
 const file = mongoose.model('file', fileSchema);
 const repository = mongoose.model('repository', repositorySchema);
+const commit = mongoose.model('commit', commitSchema);
 
 module.exports.userModel = user;
 module.exports.fileModel = file;
 module.exports.repositoryModel = repository;
+module.exports.commit = commit;
